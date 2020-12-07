@@ -1,0 +1,31 @@
+<view class="info">
+  <view class="title-box" wx:if="{{indexData.title}}" bindtap="getMore">
+    <view class="title-img">
+      <image src="{{indexData.title}}" mode="heightFix"></image>
+    </view>
+    <view style="flex-shrink: 0;">更多</view>
+  </view>
+
+  <view class="hf-image" wx:if="{{monograph&&indexData.str.banner}}">
+    <image src="{{indexData.str.banner}}" mode="aspectFill" bindtap="bindWeb" data-link="{{indexData.str.bannerUrl}}"></image>
+  </view>
+
+  <view class="good-box" wx:if="{{indexData.list.length>0}}">
+    <view wx:for="{{indexData.list}}" wx:key="index" wx:index="{{index}}" class="itemgood" bindtap="getMore">
+    <!-- <view wx:for="{{indexData.list}}" wx:key="index" wx:index="{{index}}" bindtap="navZhuan" data-id="{{item.itemId}}" data-shop_id="{{item.shopId}}"> -->
+      <!-- <navigator target="miniProgram" open-type="navigate" app-id="wxe5c4a2a98826ffcf" path="pages/goodDetail/goodDetail?id={{item.itemId}}&shop_id={{item.shopId}}&back=1" version="release" hover-class="none"> -->
+        <view class="good-img-box">
+          <image class="good-img" src="{{item.imgUrl}}" mode="aspectFill"></image>
+          <view class="good-quy" wx:if="{{region}}">
+            {{item.areas.area2}} {{item.areas.area1}}
+          </view>
+        </view>
+        <view class="price-box">
+          <text style="font-size:24rpx;color:#262626;"><text style="font-size:20rpx;">￥</text>{{item.price}}</text>
+          <image src="/images/index/price.png" mode="aspectFill"></image>
+          <text>{{item.sum}}</text>
+        </view>
+      <!-- </navigator> -->
+    </view>
+  </view>
+</view>

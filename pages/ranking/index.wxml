@@ -1,0 +1,78 @@
+<!--pages/ranking/index.wxml-->
+<navbar title="大团长" back="{{true}}"></navbar>
+<view class="recruit_info">
+    <image class="shoutu" src="{{goodDetail.imgUrl}}" mode="aspectFill"></image>
+    <!-- <view class="wenhao" bindtap="bindWeb" data-link="www">?</view> -->
+</view>
+
+<view class="flow">
+  <view class="pross-box">
+    <image src="/images/partner/fxhb.png"></image>
+    <view>分享海报</view>
+  </view>
+  <view class="pross-box1">
+    <image src="/images/partner/jiantou.png"></image>
+  </view>
+  <view class="pross-box">
+    <image src="/images/partner/qrxd.png"></image>
+    <view>用户下单并确认收货</view>
+  </view>
+  <view class="pross-box1">
+    <image src="/images/partner/jiantou.png"></image>
+  </view>
+  <view class="pross-box">
+    <image src="/images/partner/hqjl.png"></image>
+    <view>获取任务进度与奖励</view>
+  </view>
+</view>
+
+<view class="bit-box">
+  <view class="bit-title-box">
+    <view>收益排行榜</view>
+    <!-- <image src="/images/partner/right.png"></image> -->
+  </view>
+  <block wx:if="{{profitList.length>0}}">
+
+  
+  <view class="info-item" wx:for="{{profitList}}" wx:key="index">
+    <view class="info-box">
+      <image class="paihang" wx:if="{{index===0}}" src="/images/partner/frist.png"></image>
+      <image class="paihang" wx:if="{{index===1}}" src="/images/partner/second.png"></image>
+      <image class="paihang" wx:if="{{index===2}}" src="/images/partner/three.png"></image>
+      <image class="paihang" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+      <text>{{item.phone}}</text>
+    </view>
+    <view class="make-money"><text>￥</text>{{item.commissionMoney}}</view>
+  </view>
+</block>
+  <view wx:else class="wushuju">暂无排行</view>
+<!--  
+  <view class="info-item">
+    <view class="info-box">
+      <image class="paihang" src="/images/partner/qtpm.png"></image>
+      <image class="paihang" src="/images/partner/frist.png"></image>
+      <text>182****0902</text>
+    </view>
+    <view class="make-money"><text>￥</text>12912</view>
+  </view> -->
+</view>
+<!-- <poster id="poster" hide-loading="{{true}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+    <button>生成海报</button>
+</poster>
+
+<button bindtap="onCreatePoster">异步生成海报一</button>
+<button bindtap="onCreateOtherPoster">异步生成海报二</button> -->
+
+<!-- <view class='btn' bindtap='getSharePoster'>生成海报</view> -->
+<my-poster id="getPoster" bindmyevent="myEventListener" avater="{{goodDetail.imgUrl}}" codeimg="{{img}}" price="{{goodDetail.price}}" productname="{{goodDetail.title}}"></my-poster>
+
+<!-- <image src="{{img}}"></image> -->
+
+<view style="height:188rpx;"></view>
+<view class="btns_box">
+  <view class="bm_btn" bindtap='getSharePoster'>分享海报</view>
+  <view class="jr_btn" bindtap="bindJoin">
+    保存二维码
+  </view>
+</view>
+

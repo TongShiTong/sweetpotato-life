@@ -1,0 +1,391 @@
+<!--pages/task/index.wxml-->
+<wxs module="KT">
+  var keepTow = function(a) {
+    var num = Math.floor(a * 100) / 100
+    return num
+  }
+  module.exports.keepTow = keepTow;
+</wxs>
+<!-- <navbar title="番薯生活"></navbar> -->
+
+<view style="background:#fff;">
+<!-- <view class="notice-box">
+  <view class="notice-title-box">
+    <image src="/images/task/logo.png"></image>
+    <text>公告通知公告通知</text>
+  </view>
+  <view class="notice-num-box">
+    <text>3条未读</text>
+    <image src="/images/task/xx.png"></image>
+  </view>
+</view> -->
+
+<view class="basc-info">
+  <view class="avatar-box"><image src="{{userInfo.avatarUrl}}" mode="aspectFill"></image></view>
+  <view>
+    <view class="nickname-box">
+      <image src="/images/task/bxhhr.png" wx:if="{{userInfo.userType===1}}"></image>
+      <image src="/images/task/pthhr.png" wx:if="{{userInfo.userType===2}}" style="width:122rpx;"></image>
+      <image src="/images/task/qyhhr.png" wx:if="{{userInfo.userType===3}}"></image>
+      <view>{{userInfo.nickName}}</view>
+      <view class="ck-bit" bindtap="bindWeb" data-link="51">查看权益</view>
+    </view>
+    <!-- <view class="data-box">
+      <view>
+      综合评分 <text>1000</text> 排名 <text>88</text>
+      </view>
+      <view class="ck-bit" bindtap="bindWeb" data-link="51">查看权益</view>
+    </view> -->
+  </view>
+</view>
+</view>
+
+<view class="task-zx" wx:if="{{allTaskList.length>0&&userInfo.userType!=1}}">
+  <!-- <image class="task-bg" src="/images/task/task-bg.png"></image> -->
+  <image class="task-bg" src="https://www.mengdigua.cn/png/2.png"></image>
+  <view class="task-title">
+    <view>任务中心</view>
+    <!-- <view class="xq-box"><text>详情</text><image src="/images/task/bs-xy.png"></image></view> -->
+  </view>
+  <view class="lunbo-task">
+    <swiper style="height:100%;" indicator-dots="true" autoplay="{{false}}" interval="5000" indicator-dots="{{false}}" indicator-color='#8a8a8a' indicator-active-color='#333' circular="true" class="swiper-block" previous-margin="52rpx" next-margin="52rpx" current="0">
+      <block wx:for="{{allTaskList}}" wx:index="index" wx:key="index">
+        <swiper-item class="swiper-item">
+          <view class="info-swiper">
+            <view class="welfare-box">
+              <view class="welfare-tag">福利任务</view>
+              <view class="welfare-title">{{item.taskName}}</view>
+            </view>
+            <view class="sx-desc">任务时限：距离任务结束还剩{{item.distanceTime}}</view>
+            <scroll-view scroll-x="true" bindscroll="lineScroll" scroll-left="{{scrollLeft}}" data-index="{{index}}">
+              <view class="reward-box">
+                <view class="reward" wx:for="{{item.subtaskList}}" wx:for-item="itemData" wx:key="index1">
+                  <image class="biaoshi" src="/images/task/lqrw.png"></image>
+                  <view class="biaoshi-box">
+                    <view class="reward-title">{{itemData.saleTask}}</view>
+                    <view class="reward-jl">{{itemData.amount}}</view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+            <view class="scroll-tiao" wx:if="{{item.subtaskList.length>1}}">
+							<view class="lm-line" style="width:{{item.x_width}}rpx;left:{{item.x_scroll}}%;"></view>
+						</view>
+            <view class="liji-btn" bindtap="receive" data-id="{{item.taskId}}" data-index="{{index}}">
+              立即领取
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view> 
+
+<view class="task-zx1" style="height:{{userInfo.userType===1?'':'698rpx'}}" wx:if="{{myTaskList.length>0}}">
+  <!-- <image class="task-bg" wx:if="{{userInfo.userType===1}}" src="/images/task/rwfl2.png"></image> -->
+  <image class="task-bg" wx:if="{{userInfo.userType===1}}" src="https://www.mengdigua.cn/png/3.png"></image>
+  <!-- <image class="task-bg" wx:else src="/images/task/tast-bg2.png"></image> -->
+  <image class="task-bg" wx:else src="https://www.mengdigua.cn/png/1.png"></image>
+  <view class="task-title">
+    <view>我的任务 <text class="activenum">({{currentIndex+1}}/{{myTaskList.length}})</text></view>
+    <!-- <view class="xq-box"><text>详情</text><image src="/images/task/bs-xy.png"></image></view> -->
+  </view>
+  <view class="lunbo-task" style="height:{{userInfo.userType===1?'':'550rpx'}}">
+    <swiper style="height:100%;" indicator-dots="true" autoplay="{{false}}" interval="5000" indicator-dots="{{false}}" indicator-color='#8a8a8a' indicator-active-color='#333' circular="true" class="swiper-block" bindchange="swiperChange" current="0">
+      <block wx:for="{{myTaskList}}" wx:index="index" wx:key="index">
+        <swiper-item class="swiper-item1">
+          <view class="info-swiper1" style="height:{{userInfo.userType===1?'':'516rpx'}}">
+            <view class="welfare-box">
+              <view class="welfare-tag">福利任务</view>
+              <view class="welfare-title">{{item.taskName}}</view>
+            </view>
+            <view class="sx-desc1">任务时限：距离任务结束还剩{{item.distanceTime}}</view>
+            <scroll-view scroll-x="true" bindscroll="lineScroll1" data-index="{{index}}">
+              <view class="reward-box">
+                <view class="{{itemData.Completion?'reward2':'reward1'}}" wx:for="{{item.subtaskList}}" wx:for-item="itemData" wx:key="index1">
+                  <image class="biaoshi" wx:if="{{itemData.Completion}}" src="/images/task/ydb.png"></image>
+                  <image class="biaoshi" wx:else src="/images/task/wdb.png"></image>
+                  <view class="biaoshi-box">
+                    <view class="reward-title1">{{itemData.saleTask}}</view>
+                    <view class="reward-jl1">{{itemData.amount}}</view>
+                    <view class="jindu" wx:if="{{itemData.Completion}}">进度：<text style="color:#8c8c8c;">已达标</text></view>
+                    <view class="jindu" wx:else>进度：<text>{{itemData.goodsQuota?itemData.goodsQuota:'0'}}</text></view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+            <view class="scroll-tiao" wx:if="{{item.subtaskList.length>1}}">
+							<view class="lm-line1" style="width:{{item.x_width}}rpx;left:{{item.x_scroll}}%;"></view>
+						</view>
+            <view class="liji-btn12" wx:if="{{item.mainTask}}">
+              已完成
+            </view>
+            <view class="liji-btn1" wx:else bindtap="buyGood" data-id="{{item.goodsId}}">
+              去完成
+            </view>
+            <block wx:if="{{userInfo.userType===1}}">
+              <view class="wdpm-box">
+                <view class="pm-info">
+                  <view><image class="image" src="/images/task/wdpm.png"></image> </view>
+                  <view><image class="img-avatar" src="{{item.userTaskRanking.avatarUrl}}" mode="aspectFill"></image> </view>
+                  <view>第{{item.userTaskRanking.ranking}}名</view>
+                </view>
+                <view class="ljxl"><view>累计销量</view><text>{{item.userTaskRanking.value?item.userTaskRanking.value:'0'}}</text></view>
+              </view>
+
+              <view wx:for="{{item.taskRanking}}" wx:key="index2" wx:for-index="index2" wx:for-item="raningItem">
+                <view class="wdpm-box1" wx:if="{{index2<3}}">
+                  <view class="pm-info">
+                    <view wx:if="{{index2===0}}"><image src="/images/task/1th.png"></image> </view>
+                    <view wx:if="{{index2===1}}"><image src="/images/task/2th.png"></image> </view>
+                    <view wx:if="{{index2===2}}"><image src="/images/task/3th.png"></image> </view>
+                    <view><image class="img-avatar" src="{{raningItem.avatarUrl}}"></image> </view>
+                    <view>第{{raningItem.ranking}}名</view>
+                  </view>
+                  <view class="ljxl"><view>累计销量</view><text>{{raningItem.value?raningItem.value:'0'}}</text></view>
+                </view>
+              </view>
+           
+            </block>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots-box own-class">
+      <view class="dots {{currentIndex == index ? 'bg-333' : ''}}" wx:for="{{myTaskList}}" wx:key="index"></view>
+    </view>
+  </view>
+</view> 
+
+<view class="statistics">
+  <view class="sta-title">月收益统计</view>
+  <view class="jieshi" bindtap="bindWeb" data-link="52"><image src="/images/task/js-wh.png"></image> </view>
+  <view class="yiji">预计收益</view>
+  <view class="money"><text>￥</text>{{KT.keepTow(monthInfo.profitMoney)}}</view>
+
+  <view class="yuji-qysy" wx:if="{{userInfo.userType===3}}">
+    <view>预计区域收益</view>
+    <view>￥{{KT.keepTow(monthInfo.regionMoney)}}</view>
+  </view> 
+  <view class="yuji-qysy" wx:if="{{userInfo.userType!=1}}">
+    <view>预计销售收益</view>
+    <view>￥{{KT.keepTow(monthInfo.commissionMoney)}}</view>
+  </view> 
+  <view class="row-box" wx:if="{{userInfo.userType!=1}}">
+    <view class="roe-info">
+      <view>预计考核奖金</view>
+      <view style="margin-top:8rpx;">￥{{KT.keepTow(monthInfo.assessMoney)}}</view>
+    </view>
+    <view class="roe-info">
+      <view>预计补贴奖金</view>
+      <view style="margin-top:8rpx;">￥{{KT.keepTow(monthInfo.subsidyMoney)}}</view>
+    </view>
+  </view>
+
+  <view class="ddkh-box">
+    <view class="ddkh-info">
+      <view class="yj-title">预计订单</view>
+      <view class="yi-num">{{monthInfo.orderNum}}</view>
+      <!-- <view class="yj-detail">订单详情</view> -->
+    </view>
+    <view style="width:2rpx;height:200rpx;background:#E8E8E8;"></view>
+    <view class="ddkh-info">
+      <view class="yj-title">预计客户</view>
+      <view class="yi-num">{{monthInfo.customerNum}}</view>
+      <!-- <view class="yj-detail">客户详情</view> -->
+    </view>
+  </view>
+  <view class="titm-box">
+    <view class="jt-time">
+      <!-- <view style="margin-right:40rpx;">近7天</view>
+      <view>近30天</view> -->
+    </view>
+    
+    <picker mode="date" value="{{date}}" fields="month" start="2020-11" end="2030-01" bindchange="bindDateChange">
+      <view class="time-info">
+        <view class="picker">
+        {{date}}
+        </view>
+        <view><image src="/images/task/xx-sjx.png"></image></view>
+      </view>
+    </picker>
+    
+  </view>
+
+  <view hidden="{{showFitPopue}}">
+    <view class="containers" hidden="{{showPopue}}">
+      <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+  
+</view>
+
+<view class="quyu-info-box" wx:if="{{userInfo.userType===3&&monthInfo.districtList.length>0}}">
+  <view class="quyu-title">
+    <view>区域返利设置</view>
+    <view></view>
+  </view>
+  <view class="cont-info">
+    <view class="qy-info-box" wx:for="{{monthInfo.districtList}}" wx:key="index" bindtap="setFanli" data-scale="{{item.regionScale}}" data-id="{{item.id}}" data-name="{{item.name}}">
+      <view>{{item.name}}</view>
+      <view>返利 <text>{{item.regionScale}}</text>%</view>
+    </view>
+     <!-- <view class="qy-info-box" bindtap="setFanli">
+      <view>萧山区</view>
+      <view>返利 <text>12.00</text>%</view>
+    </view> -->
+  </view>
+</view>
+
+<view class="quyu-info-box" wx:if="{{userInfo.userType===3}}">
+  <view class="quyu-title">
+    <view>区域管理</view>
+    <!-- <view><text>详情</text><image src="/images/task/hs-xy.png"></image></view> -->
+  </view>
+  <view class="juti-data">
+    <view class="doyue">
+      <view class="m-title">本月新增数据</view>
+      <view class="m-left">
+        <view class="m-left-item">
+          <view>区域新客户</view>
+          <view class="m-num">{{areaInfo.numberOfRegionalNewCustomers}}</view>
+        </view>
+        <view class="m-left-item">
+          <view>区域购买客户</view>
+          <view class="m-num">{{areaInfo.regionalBuyingCustomers}}</view>
+        </view>
+        <view class="m-left-item">
+          <view>区域新客订单</view>
+          <view class="m-num">{{areaInfo.regionalNewCustomerOrder}}</view>
+        </view>
+        <view class="m-left-item">
+          <view>区域复购订单</view>
+          <view class="m-num">{{areaInfo.regionalRepurchaseOrder}}</view>
+        </view>
+      </view>
+    </view>
+    <view style="width:2rpx;height:328rpx;background:#E8E8E8;"></view>
+    <view class="leiji">
+      <view class="m-title">累计数据</view>
+      <view>区域客户总数</view>
+      <view class="m-num">{{areaInfo.totalRegionalCustomers}}</view>
+      <view>区域订单总数</view>
+      <view class="m-num">{{areaInfo.totalRegionalOrders}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="quyu-info-box" wx:if="{{userInfo.userType===3}}">
+  <view class="quyu-title">
+    <view>合伙人管理</view>
+    <!-- <view><text>详情</text><image src="/images/task/hs-xy.png"></image></view> -->
+  </view>
+  <view class="juti-data">
+    <view class="doyue">
+      <view class="m-title">本月新增数据</view>
+      <view class="m-left">
+        <view class="m-left-item">
+          <view>新合伙人</view>
+          <view class="m-num">{{partnerInfo.newPartners}}</view>
+        </view>
+        <view class="m-left-item">
+          <view>销售额</view>
+          <view class="m-num"><text>￥</text>{{KT.keepTow(partnerInfo.salesVolume)}}</view>
+        </view>
+      </view>
+    </view>
+    <view style="width:2rpx;height:180rpx;background:#E8E8E8;"></view>
+    <view class="leiji">
+      <view class="m-title">累计数据</view>
+      <view>合伙人总数</view>
+      <view class="m-num">{{partnerInfo.totalPartners}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="quyu-info-box">
+  <view class="quyu-title">
+    <view>客户管理</view>
+    <!-- <view><text>详情</text><image src="/images/task/hs-xy.png"></image></view> -->
+  </view>
+  <view class="juti-data">
+    <view class="doyue">
+      <view class="m-title">本月新增数据</view>
+      <view class="m-left">
+        <!-- <view class="m-left-item">
+          <view>新客户</view>
+          <view class="m-num">12</view>
+        </view> -->
+        <view class="m-left-item">
+          <view>购买客户</view>
+          <view class="m-num">{{kehuInfo.buyCustomers}}</view>
+        </view>
+      </view>
+    </view>
+    <view style="width:2rpx;height:180rpx;background:#E8E8E8;"></view>
+    <view class="leiji">
+      <view class="m-title">累计数据</view>
+      <view>客户总数</view>
+      <view class="m-num">{{kehuInfo.total}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="quyu-info-box">
+  <view class="quyu-title">
+    <view>订单管理</view>
+    <!-- <view><text>详情</text><image src="/images/task/hs-xy.png"></image></view> -->
+  </view>
+  <view class="juti-data">
+    <view class="doyue">
+      <view class="m-title">本月新增数据</view>
+      <view class="m-left">
+        <view class="m-left-item">
+          <view>新客订单</view>
+          <view class="m-num">{{orderInfo.newOrder}}</view>
+        </view>
+        <view class="m-left-item">
+          <view>复购订单</view>
+          <view class="m-num">{{orderInfo.repurchaseOrder}}</view>
+        </view>
+      </view>
+    </view>
+    <view style="width:2rpx;height:180rpx;background:#E8E8E8;"></view>
+    <view class="leiji">
+      <view class="m-title">累计数据</view>
+      <view>订单总数</view>
+      <view class="m-num">{{orderInfo.totalOrder}}</view>
+    </view>
+  </view>
+</view>
+
+
+<block wx:if="{{showPopue}}">
+  <view class="pupoe" catchtouchmove="preventTouchMove">
+    <view class="img_box">
+      <view class="pop-title">{{name}}返利</view>
+      <view class="input-box">
+        <input class="weui-input" value="{{areaScale}}" bindinput="bindAreaScale" placeholder-style="#8c8c8c" placeholder="0" /><text>%</text>
+      </view>
+      <view class="btns_box">
+        <view class="qixiao" bindtap="close">取消</view>
+        <view class="queren" bindtap="setPartnerInfo">确认</view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<block wx:if="{{showFitPopue}}">
+  <view class="pupoe" catchtouchmove="preventTouchMove">
+    <view class="img_box">
+      <view class="pop-title">收益确认</view>
+      <view class="input-box1">
+        上月收益已结算完成，请确认！
+      </view>
+      <view class="btns_box">
+        <view class="qixiao" bindtap="fitClose">取消</view>
+        <view class="queren" bindtap="confirm1">确认</view>
+      </view>
+    </view>
+  </view>
+</block>

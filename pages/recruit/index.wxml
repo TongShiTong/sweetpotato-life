@@ -1,0 +1,23 @@
+<!--pages/recruit/index.wxml-->
+
+<block wx:if="{{show}}"> 
+<navbar title="合伙人招募"></navbar>
+<view class="recruit_info">
+  <!-- <image src="/images/bmjj.png" style="width:100%;" mode="widthFix"></image> -->
+  <image src="https://www.mengdigua.cn/png/8.png" style="width:100%;" mode="widthFix"></image>
+</view>
+<view style="height:180rpx;"></view>
+
+<view class="btns_box" wx:if='{{switch===1}}'>
+  <view class="bm_btn" bindtap="bindJoin" data-type="0">立即报名</view>
+  <view class="jr_btn" bindtap="bindJoin" data-type="1">
+    <view style="line-height: 40rpx;">直接加入</view>
+    <view class="dsc">有渠道资源</view>
+  </view>
+</view>
+<view class="btns_box1" wx:if='{{switch===0}}'>
+  <view class="weiks">当前报名暂未开启</view>
+  <view>关注番薯生活平台微信公众号</view>
+  <view>获取最新报名讯息哦~</view>
+</view>
+</block>

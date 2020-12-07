@@ -1,0 +1,24 @@
+<!--pages/login/index.wxml-->
+<block>
+  <navbar title="番薯生活" back="{{true}}"></navbar>
+  <view class="login_box">
+    <image src="/images/login/logo.png"></image>
+  </view>
+
+  <view class="login_btn_box" wx:if="{{back}}">
+   <button class='login_btn' bindgetuserinfo='confirm' open-type="getUserInfo">
+    授权微信头像、昵称
+    </button>
+  </view>
+
+  <view class="login_btn_box" wx:else>
+    <button class='login_btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+    微信用户一键登录
+    </button>
+  </view>
+
+  <view class="agreement">
+    注册/登录即代表同意<text bindtap="bindWeb" data-link="49">隐私政策</text>和<text bindtap="bindWeb" data-link="50">用户协议</text>
+  </view>
+</block>
+

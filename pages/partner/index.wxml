@@ -1,0 +1,36 @@
+<!--pages/partner/index.wxml-->
+<navbar title="合伙人" back="{{back}}"></navbar>
+
+<view class="box">
+  <view class="partner_info">
+
+  </view>
+  <!-- <image class="beijin" src="/images/bmbj.png" mode="widthFix"></image> -->
+  <image class="beijin" src="https://www.mengdigua.cn/png/7.png" mode="widthFix"></image>
+
+  <view class="information">
+    <view class="fill">资料填写</view>
+    <label class="info_box">
+        <image src="/images/partner/name.png"></image>
+        <input placeholder="姓名" placeholder-style="#8c8c8c" value="{{name}}" bindinput="bindName"></input>
+    </label>
+    <label class="info_box">
+        <image src="/images/partner/phone.png"></image>
+        <input placeholder="手机号" placeholder-style="#8c8c8c" value="{{phone}}" bindinput="bindPhone"></input>
+    </label>
+    <label class="info_box">
+        <image src="/images/partner/wx.png"></image>
+        <input placeholder="微信号" placeholder-style="#8c8c8c" value="{{weixin}}" bindinput="bindWx"></input>
+    </label>
+    <label class="info_box">
+        <image src="/images/partner/zhiye.png"></image>
+        <textarea wx:if="{{type==1}}" placeholder="我的优势（如拥有规模实体店、有稳定的粉丝群体或渠道流量，需填写具体数量并保证真实有效申请后将会有工作人员审核）" placeholder-style="#8c8c8c" value="{{desc}}" bindinput="bindDesc"></textarea>
+        <textarea wx:else placeholder="当前工作状态，如学生、全职、自由职业等" placeholder-style="#8c8c8c" value="{{desc}}" bindinput="bindDesc"></textarea>
+    </label>
+  </view>
+
+  <view class="btns_box">
+    <view class="bm_btn" bindtap="submit">提交</view>
+  </view>
+</view>
+

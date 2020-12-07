@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navigation",
+    "Swiper": "/components/swiper/swiper",
+    "plata": "/components/plate",
+    "mp-loading": "weui-miniprogram/loading/loading"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#FF5704",
+  "backgroundColorTop": "#FF5704"
+
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navigation",
+    "mp-loading": "weui-miniprogram/loading/loading"
+  }
+}

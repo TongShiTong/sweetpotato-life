@@ -1,0 +1,55 @@
+<!--pages/profit/index.wxml-->
+<wxs module="KT">
+  var keepTow = function(a) {
+    var num = Math.floor(a * 100) / 100
+    return num
+  }
+  var month = function(date) {
+    var time = date.slice(5)
+    return time
+  }
+  module.exports.keepTow = keepTow;
+  module.exports.month = month;
+</wxs>
+<navbar title="收益确认" back="{{true}}"></navbar>
+
+<view class="fit-box">
+  <view class="fit-head">
+    <view class="fit-total">
+      <view>{{KT.month(allInfo.profitMonth)}}月收益确认</view>
+      <view class="toa-mony"><text>￥</text>{{KT.keepTow(allInfo.commissionMoney+allInfo.regionMoney+allInfo.taskMoney)}}</view>
+    </view>
+    <view class="fq-detail">
+      <view class="fit-item-box">
+        <view>销售收益</view>
+        <view>￥{{KT.keepTow(allInfo.commissionMoney)}}</view>
+      </view>
+      <view class="fit-item-box">
+        <view>区域分红</view>
+        <view>￥{{KT.keepTow(allInfo.regionMoney)}}</view>
+      </view>
+      <view class="fit-item-box">
+        <view>奖金福利</view>
+        <view>￥{{KT.keepTow(allInfo.taskMoney)}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="fit-info">
+    <view class="fit-info-title">身份信息</view>
+    <input class="fit-input" placeholder="姓名" placeholder-style="#8c8c8c" value="{{allInfo.bankInfo.userName}}" bindinput="bindName"></input>
+    <input class="fit-input" placeholder="身份证信息" value="{{allInfo.bankInfo.identityCode}}" bindinput="bindIdCard" placeholder-style="#8c8c8c"></input>
+
+    <view class="fit-info-title">收款信息</view>
+    <input class="fit-input" placeholder="收款账户" value="{{allInfo.bankInfo.bankAccount}}" bindblur="BackInfo" bindinput="bindBankCard" placeholder-style="#8c8c8c"></input>
+    <input class="fit-input" placeholder="收款银行" value="{{allInfo.bankInfo.receivingBank}}" bindinput="bindBank" placeholder-style="#8c8c8c"></input>
+    <input class="fit-input" placeholder="开户行" value="{{allInfo.bankInfo.bankName}}" bindinput="bindkhBank" placeholder-style="#8c8c8c"></input>
+    
+    <view class="fit-info-title zhushi">收款信息</view>
+    <view class="info-zs">番薯生活每个月20号结算，结算收益为上个月确认收货订单收益与平台奖励。收益将在确认后7天内发放，若未在20号确认上个月收益将顺延到下个月进行结算。</view>
+    <view class="ptks-title">平台综合扣税</view>
+    <view class="info-zs">平台会按综合收益所得扣除10%进行结算。</view>
+  </view>
+</view>
+
+<view class="subit" bindtap="setFanli">确认</view>

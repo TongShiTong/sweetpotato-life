@@ -1,0 +1,92 @@
+/* pages/partner/index.wxss */
+page {
+  background-color: #f5f5f5;
+}
+.box {
+  position: relative;
+}
+.box .beijin {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.partner_info {
+  font-size: 40rpx;
+  color: #262626;
+  height: 380rpx;
+  font-weight: 600;
+  text-align: center;
+  /* margin-top: 104rpx; */
+  /* margin-bottom: 268rpx; */
+}
+.information {
+  margin: 0 24rpx 232rpx;
+  padding: 48rpx 60rpx 64rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 24rpx;
+  position: relative;
+  z-index: 1;
+}
+.fill {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #262626;
+  text-align: center;
+  margin-bottom: 4rpx;
+}
+.info_box {
+  display: flex;
+  margin-top: 44rpx;
+}
+.info_box image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 2rpx;
+  margin-right: 32rpx;
+}
+.info_box input {
+  width: 490rpx;
+  height: 64rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid #D9D9D9;
+  padding-left: 20rpx;
+  font-size: 26rpx;
+  color: #262626;
+  box-sizing: border-box;
+}
+.info_box textarea {
+  width: 490rpx;
+  min-height: 248rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid #D9D9D9;
+  padding: 14rpx 20rpx;
+  font-size: 26rpx;
+  color: #262626;
+  box-sizing: border-box;
+}
+
+
+.btns_box {
+  width: 100%;
+  height: 188rpx;
+  position: fixed;
+  bottom: 0;
+  background: #FFFFFF;
+  padding: 12rpx 24rpx 0;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.bm_btn {
+  width: 702rpx;
+  height: 96rpx;
+  background: linear-gradient(270deg, #FF8700 0%, #FF5704 100%);
+  box-shadow: 0px 4rpx 16rpx 0px rgba(255,87,4,0.5);
+  border-radius: 46rpx;
+  text-align: center;
+  line-height: 96rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}

@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/recruit/index",
+    "pages/login/index",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/classify/index",
+    "pages/leader/index",
+    "pages/partner/index",
+    "pages/index/guide",
+    "pages/task/index",
+    "pages/profit/index",
+    "pages/webLink/index",
+    "pages/swiperWeb/index",
+    "pages/homeMore/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "番薯生活",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "subPackages": [
+    {
+      "root": "pages/ranking/",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/status/",
+      "pages": [
+        "index"
+      ]
+    }
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#240C20",
+    "selectedColor": "#240C20",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "番薯商城",
+        "iconPath": "images/tab4.png",
+        "selectedIconPath": "images/tab1.png"
+      },
+      {
+        "pagePath": "pages/task/index",
+        "text": "我的",
+        "iconPath": "images/tab5.png",
+        "selectedIconPath": "images/tab2.png"
+      }
+    ]
+  }
+}

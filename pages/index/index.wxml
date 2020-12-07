@@ -1,0 +1,103 @@
+<!--index.wxml-->
+<wxs module="ME1">
+  var progress = function(a,b) {
+    var num = parseInt(a/b*100)
+    return num
+  }
+  var keepTow = function(a) {
+    var num = Math.floor(a * 100) / 100
+    return num
+  }
+  module.exports.keepTow = keepTow;
+  module.exports.progress = progress;
+</wxs>
+
+<navbar bgcolor="#FF5704"></navbar>
+<view class="swiper-box" wx:if="{{imgUrls.length>0}}">
+  <Swiper class="swiper" imgUrls="{{imgUrls}}"/>  
+</view>
+<plata monograph="{{true}}" indexData="{{weekly}}" more="2" />
+<plata monograph="{{true}}" indexData="{{region}}" region="{{true}}" more="3" />
+<plata monograph="{{true}}" indexData="{{cloud}}" more="4" />
+
+<view class="rmjx-box" wx:if="{{bestSellers.length>0}}">
+  <view class="rmjx-title"><image src="/images/index/rmjx.png"></image> </view>
+
+  <view class="rmjx-good-info" wx:for="{{bestSellers}}" wx:key="index" wx:index="index">
+      <navigator target="miniProgram" open-type="navigate" app-id="wxe5c4a2a98826ffcf" path="pages/goodDetail/goodDetail?id={{item.itemId}}&shop_id={{item.shopId}}&back=1" version="release" hover-class="none">
+      <view class="good-info-box">
+        <view class="good-img-box" >
+          <image src="{{item.imgUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="good-info-boxs">
+          <view class="good-title"><image wx:if="{{item.quality}}" src="/images/index/Agrz.png"></image> {{item.title}}</view>
+          <view class="ycd-box">
+            <view wx:if="{{item.placeOrigin}}">源产地：{{item.placeOrigin}}</view>
+            <view>
+              <image class="cd-logo" src="/images/index/spcd.png"></image>
+              <text>产地品质认证</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view style="display:flex;margin-bottom:16rpx;">
+        <view class="tips-box">
+          <view class="tips-zs"></view>
+          <view class="tips-disc">水果商品仅售优质部分产能，限量供应，推完即止！</view>
+        </view>
+      </view>
+      
+      <view class="specs-box" wx:for="{{item.meItemValus}}" wx:key="specsIndex" wx:for-item="specsItem">
+        <view class="specs-title">{{specsItem.valueNames}}</view>
+        <view class="surplus-box">
+          <view class="jq-desc">
+            <text>￥</text>
+            <text class="jiaqian">{{ME1.keepTow(specsItem.price)}}</text>
+          </view>
+          <view style="text-align:center;">
+            <view>剩余{{specsItem.stock}}件</view>
+            <view class="progress-box">
+              <view class="progress" style="width:{{ME1.progress(specsItem.stock,specsItem.stockTotal+specsItem.dealNum)}}%;"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+
+    <view class="detail-info">
+      <view class="xs-wh" bindtap="bindWeb" data-link="53"><image src="/images/index/tywh.png"></image></view>
+      <view class="benefit">
+        <text class="benefit-desc">平台补贴</text>{{ME1.keepTow(item.profit.subsidyPrice)}}
+      </view>
+      <view class="benefit">
+        <text class="benefit-desc">区域返利</text>{{ME1.keepTow(item.profit.rebatePrice)}}
+      </view>
+      <view class="benefit">
+        <text class="benefit-desc1">基础收益</text>{{ME1.keepTow(item.profit.profitPrice)}}
+      </view>
+      <view class="buy-btn" bindtap="buyGood" data-id="{{item.itemId}}">我要卖</view>
+    </view>
+  </view>
+</view>
+<block wx:if="{{bestSellers.length>0}}">
+  <view class="page__bd" wx:if="{{!finished}}">
+    <mp-loading type="circle" tips="{{tips}}" show="{{show}}"></mp-loading>
+  </view>
+  <view wx:else style="text-align:center;font-size:24rpx;margin: 1.5em auto;line-height: 1.6em;color: #999;">我也是有底线的~</view>
+</block>
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+
+  <view bindtap="navZhuan">
+    跳转萌地瓜小程序
+  </view>
+</view> -->

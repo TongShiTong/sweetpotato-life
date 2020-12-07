@@ -1,0 +1,20 @@
+<!--components/navigation/index.wxml-->
+<!-- <view> -->
+  <view class="navbar" style="background-color:{{bgcolor}};">
+    <view style="height:{{statusBarHeight*2}}rpx"></view>
+    <view class="nav_box">
+      <view class="back" bindtap="back" wx:if="{{back}}">
+        <image src="/images/navbar/back.png"></image>
+      </view>
+      <view class="back" wx:else></view>
+      <view class="nav_title" wx:if="{{title}}">
+      {{title}}
+      </view>
+      <view class="nav_title_img" wx:else><image src="/images/index/title.png"></image> </view>
+      <view class="back"></view>
+    </view>
+    
+  </view>
+  <view style="height:{{statusBarHeight*2+88}}rpx"></view>
+<!-- </view> -->
+

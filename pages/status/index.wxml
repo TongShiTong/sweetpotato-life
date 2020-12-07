@@ -1,0 +1,46 @@
+<!--pages/status/index.wxml-->
+<navbar title="合伙人"></navbar>
+
+<block wx:if="{{status==1}}">
+  <view class="chahu">
+    <image src="/images/partner/success.png"></image>
+  </view>
+
+  <view class="tips">
+    <view class="tips_succ">提交成功</view>
+    <view>请耐心等待工作人员审核~</view>
+  </view>
+</block>
+
+<block wx:if="{{status==3}}">
+  <view class="pupoe" wx:if="{{pupoe}}">
+    <view class="img_box">
+      <!-- <image src="/images/partner/puper.png"></image> -->
+      <image wx:if="{{uesr.userType===1}}" src="https://www.mengdigua.cn/png/4.png"></image>
+      <image wx:if="{{uesr.userType===3}}" src="https://www.mengdigua.cn/png/5.png"></image>
+      <image wx:if="{{uesr.userType===2}}" src="https://www.mengdigua.cn/png/6.png"></image>
+      <view class="btns_box">
+        <view class="qixiao" bindtap="close">取消</view>
+        <view class="queren" bindtap="confirm">确认</view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<block wx:if="{{ status==2 || status==4 || status==5 }}">
+  <view class="chahu">
+    <image src="/images/partner/fail.png"></image>
+  </view>
+
+  <view class="tips">
+    <view class="tips_succ">审核未通过</view>
+    <view>请耐心等待下次报名机会哦~</view>
+  </view>
+
+  <view class="again_btn" bindtap="again" wx:if="{{ status==2&&switch==1 }}">
+   重新申请
+  </view>
+</block>
+
+
+

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navigation",
+    "taskSwiper": "/components/taskSwiper",
+    "ec-canvas": "/components/ec-canvas/ec-canvas"
+  },
+  "navigationStyle":"default",
+  "enablePullDownRefresh": true
+}

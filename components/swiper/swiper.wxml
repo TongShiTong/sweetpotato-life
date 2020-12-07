@@ -1,0 +1,13 @@
+<swiper indicator-dots="true" autoplay="{{true}}" interval="5000" indicator-dots="{{false}}" indicator-color='#8a8a8a' indicator-active-color='#333' circular="true" class="swiper-block" bindchange="swiperChange" current="0">
+  <block wx:for="{{imgUrls}}" wx:key="index" wx:index="{{index}}">
+    <swiper-item class="swiper-item" bindtap="bindWeb" data-link="{{item.bannerUrl}}">
+      <view class="image-box">
+        <image mode="aspectFill" src="{{item.banner}}" />
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class="dots-box own-class">
+  <view class="dots {{currentIndex == index ? 'bg-333' : ''}}" wx:for="{{imgUrls}}" wx:key="index"></view>
+</view>

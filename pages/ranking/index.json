@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navigation",
+    "poster": "/components/poster/index",
+    "my-poster":"/components/posters/index"
+  }
+}
